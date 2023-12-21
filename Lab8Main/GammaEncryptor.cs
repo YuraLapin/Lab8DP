@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
+﻿using System.Text;
 
 namespace Lab8Main
 {
@@ -15,14 +9,16 @@ namespace Lab8Main
         private static int BLOCK_SIZE = 32;
         private static int SYMBOLS_IN_BLOCK = BLOCK_SIZE / SYMBOL_SIZE;
 
-        private static byte[] StringToByte(string str)
+        private static UnicodeEncoding unicodeEncoding = new UnicodeEncoding();
+
+        private static byte[] StringToByte(string input)
         {
-            return Encoding.ASCII.GetBytes(str);
+            return unicodeEncoding.GetBytes(input);
         }
 
         private static string ByteToString(byte[] bytes)
         {
-            return Encoding.ASCII.GetString(bytes); ;
+            return unicodeEncoding.GetString(bytes);
         }
 
         private static string PadString(string str, int blockSize)
@@ -123,12 +119,13 @@ namespace Lab8Main
 
             var blocks = input.Count() / SYMBOLS_IN_BLOCK;
 
-            for (int i = 0; i < blocks; i += SYMBOLS_IN_BLOCK)
+            for (int i = 0; i < blocks; i += 1)
             {
-                var block = input.Substring(i, SYMBOLS_IN_BLOCK);
+                var block = input.Substring(i * SYMBOLS_IN_BLOCK, SYMBOLS_IN_BLOCK);
                 var byteBlock = StringToByte(block);
                 var encyptedBlock = Encrypt(byteBlock, byteKey);
-                sBuilder.Append(ByteToString(encyptedBlock));
+                var strBlock = ByteToString(encyptedBlock);
+                sBuilder.Append(strBlock);
             }
 
             return sBuilder.ToString();
@@ -144,12 +141,13 @@ namespace Lab8Main
 
             var blocks = input.Count() / SYMBOLS_IN_BLOCK;
 
-            for (int i = 0; i < blocks; i += SYMBOLS_IN_BLOCK)
+            for (int i = 0; i < blocks; i += 1)
             {
-                var block = input.Substring(i, SYMBOLS_IN_BLOCK);
+                var block = input.Substring(i * SYMBOLS_IN_BLOCK, SYMBOLS_IN_BLOCK);
                 var byteBlock = StringToByte(block);
                 var encyptedBlock = Decrypt(byteBlock, byteKey);
-                sBuilder.Append(ByteToString(encyptedBlock));
+                var strBlock = ByteToString(encyptedBlock);
+                sBuilder.Append(strBlock);
             }
 
             return sBuilder.ToString();

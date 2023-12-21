@@ -38,6 +38,7 @@
             // 
             // decodedTextBox
             // 
+            decodedTextBox.Font = new Font("Segoe UI", 12F);
             decodedTextBox.Location = new Point(12, 12);
             decodedTextBox.Multiline = true;
             decodedTextBox.Name = "decodedTextBox";
@@ -46,6 +47,7 @@
             // 
             // encodedTextBox
             // 
+            encodedTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             encodedTextBox.Location = new Point(718, 12);
             encodedTextBox.Multiline = true;
             encodedTextBox.Name = "encodedTextBox";
@@ -74,6 +76,7 @@
             // 
             // keyTextBox
             // 
+            keyTextBox.Font = new Font("Segoe UI", 12F);
             keyTextBox.Location = new Point(365, 36);
             keyTextBox.Multiline = true;
             keyTextBox.Name = "keyTextBox";
